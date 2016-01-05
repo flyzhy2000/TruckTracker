@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="android.chinaway.com.trucktracker" >
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +12,7 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="MSmE5TsqjXDR0e6VfbCDYleW" />
+            android:value="Vw8WxLVLKawSVxUUKMTYPSjE" />
         <activity
             android:name="com.chinaway.android.trucktracker.MainActivity"
             android:label="@string/app_name" >
