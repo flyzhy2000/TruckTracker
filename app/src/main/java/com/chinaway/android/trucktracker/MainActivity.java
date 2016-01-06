@@ -19,6 +19,7 @@ public class MainActivity extends ActionBarActivity {
 
     private TextView mLocationOutput;
     private boolean mBeepFlag = false;
+    private int mLocationCount = 0;
     private LocationTracker mTracker;
 
     @Override
@@ -33,12 +34,13 @@ public class MainActivity extends ActionBarActivity {
         btnStop.setEnabled(false);
 
         mTracker = new LocationTracker.Builder(this)
-                        .setMode(LocationTracker.GPS_MODE)
+//                        .setMode(LocationTracker.GPS_MODE)
                         .setLocationListener(new LocationListener() {
                             @Override
                             public void onLocationChanged(Location location) {
                                 String info = "location: " + location.getLongitude() + ", " + location.getLatitude()
-                                        + " | accuracy: " + location.getAccuracy();
+                                        + "\nprovider: " + location.getProvider()
+                                        + "\naccuracy: " + location.getAccuracy() + "\n" + (++mLocationCount);
                                 if (mBeepFlag) {
                                     mLocationOutput.setTextColor(Color.RED);
                                 } else {
