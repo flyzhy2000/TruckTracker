@@ -33,14 +33,15 @@ public class RandomSampler extends AbstractLocationSampler {
     public void onNewLocation(Location location) {
         if (mFirstFlag) {
             mFirstFlag = false;
-            mCallback.onNewSample(location);  // sample the start location immediately
+            // sample the start location immediately
+            mCallback.onNewSample(new SampleLocation(location.getLongitude(), location.getLatitude()));
 
             updateTime();
             return;
         } else {
             long timeElapse = System.currentTimeMillis() - mTime;
             if (timeElapse >= mSamplingTimeInterval) {
-                mCallback.onNewSample(location);
+                mCallback.onNewSample(new SampleLocation(location.getLongitude(), location.getLatitude()));
                 mLocation = null;
                 updateTime();
             } else {
@@ -52,7 +53,7 @@ public class RandomSampler extends AbstractLocationSampler {
     @Override
     public void onEnd() {
         if (mLocation != null) {
-            mCallback.onNewSample(mLocation);
+            mCallback.onNewSample(new SampleLocation(mLocation.getLongitude(), mLocation.getLatitude()));
         }
     }
 }

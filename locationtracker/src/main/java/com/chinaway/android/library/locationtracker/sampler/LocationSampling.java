@@ -10,7 +10,7 @@ import java.util.List;
 public interface LocationSampling {
 
     public static interface LocationSamplingCallback {
-        public void onNewSample(Location location);
+        public void onNewSample(SampleLocation location);
     }
 
     public void onStart();
