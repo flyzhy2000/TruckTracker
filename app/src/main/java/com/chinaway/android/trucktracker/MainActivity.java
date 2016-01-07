@@ -11,11 +11,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chinaway.android.library.locationtracker.LocationTracker;
+import com.chinaway.android.library.locationtracker.sampler.LocationSampling;
+import com.chinaway.android.library.locationtracker.sampler.RandomSampler;
+import com.chinaway.android.library.locationtracker.sampler.SampleLocation;
+import com.chinaway.android.library.locationtracker.utils.FileUtils;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private static final String FILE_RANDOM = "random_sample";
+    private static final String FILE_LEAST_SQUARE = "least_square";
 
     private TextView mLocationOutput;
     private boolean mBeepFlag = false;
@@ -34,37 +42,46 @@ public class MainActivity extends ActionBarActivity {
         btnStop.setEnabled(false);
 
         mTracker = new LocationTracker.Builder(this)
-//                        .setMode(LocationTracker.GPS_MODE)
-                        .setLocationListener(new LocationListener() {
-                            @Override
-                            public void onLocationChanged(Location location) {
-                                String info = "location: " + location.getLongitude() + ", " + location.getLatitude()
-                                        + "\nprovider: " + location.getProvider()
-                                        + "\naccuracy: " + location.getAccuracy() + "\n" + (++mLocationCount);
-                                if (mBeepFlag) {
-                                    mLocationOutput.setTextColor(Color.RED);
-                                } else {
-                                    mLocationOutput.setTextColor(Color.BLUE);
-                                }
-                                mBeepFlag = !mBeepFlag;
-                                mLocationOutput.setText(info);
-                            }
+                        .setMode(LocationTracker.AUTO_MODE)
+//                        .setLocationListener(new LocationListener() {
+//                            @Override
+//                            public void onLocationChanged(Location location) {
+//                                String info = "location: " + location.getLongitude() + ", " + location.getLatitude()
+//                                        + "\nprovider: " + location.getProvider()
+//                                        + "\naccuracy: " + location.getAccuracy() + "\n" + (++mLocationCount);
+//                                if (mBeepFlag) {
+//                                    mLocationOutput.setTextColor(Color.RED);
+//                                } else {
+//                                    mLocationOutput.setTextColor(Color.BLUE);
+//                                }
+//                                mBeepFlag = !mBeepFlag;
+//                                mLocationOutput.setText(info);
+//                            }
+//
+//                            @Override
+//                            public void onStatusChanged(String provider, int status, Bundle extras) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onProviderEnabled(String provider) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onProviderDisabled(String provider) {
+//
+//                            }
+//                        })
+                        .build();
 
-                            @Override
-                            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                            }
-
-                            @Override
-                            public void onProviderEnabled(String provider) {
-
-                            }
-
-                            @Override
-                            public void onProviderDisabled(String provider) {
-
-                            }
-                        }).build();
+        mTracker.addSampler(new RandomSampler(new LocationSampling.LocationSamplingCallback() {
+            @Override
+            public void onNewSample(SampleLocation location) {
+                Toast.makeText(MainActivity.this, location.toString(), Toast.LENGTH_LONG).show();
+//                FileUtils.dumpToFile(location.toString(), FILE_RANDOM);
+            }
+        }, 10000));
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
