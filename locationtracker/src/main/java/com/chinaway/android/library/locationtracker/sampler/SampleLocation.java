@@ -19,6 +19,6 @@ public class SampleLocation {
         return Calendar.getInstance().getTime().toString() + " | " + longitude + ", " + latitude + "\n";
     }
 
-    double longitude;
-    double latitude;
+    public double longitude;
+    public double latitude;
 }

@@ -8,28 +8,38 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity">
 
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+
     <TextView
-        android:text="@string/hello_world"
+        android:text="info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/output"/>
+        android:id="@+id/output"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="START"
         android:id="@+id/btn_start"
-        android:layout_below="@+id/output"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="73dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="STOP"
         android:id="@+id/btn_stop"
+        android:layout_marginTop="53dp"
         android:layout_below="@+id/btn_start"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"/>
+        android:layout_alignLeft="@+id/btn_start"
+        android:layout_alignStart="@+id/btn_start"/>
 
 </RelativeLayout>
