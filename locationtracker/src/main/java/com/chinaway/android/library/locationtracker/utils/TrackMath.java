@@ -140,6 +140,15 @@ public class TrackMath {
                 endLatitude, endLongitude, results);
     }
 
+    public static float distanceBetween(double startLatitude, double startLongitude,
+                                       double endLatitude, double endLongitude) {
+        float[] results = new float[2];
+        computeDistanceAndBearing(startLatitude, startLongitude,
+                endLatitude, endLongitude, results);
+
+        return results[0];
+    }
+
     public static float distanceBetween(Location lastLocation, Location newLocation) {
         float distance = 0.0f;
         if (lastLocation != null && newLocation != null) {
