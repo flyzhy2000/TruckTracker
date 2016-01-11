@@ -83,7 +83,9 @@ public class DefaultLocationNotifier {
 
     private boolean filtLocation(SampleLocation location) {
         boolean isTooClose = isTooClose(mLocation, location);
-        mLocation = location;
+        if (!isTooClose) {
+            mLocation = location;
+        }
         return isTooClose;
     }
 
